@@ -155,7 +155,7 @@ def filter_page(page_size, page, job_id):
         )
 
     modified_results = sorted(
-        modified_results, key=lambda candidate: int(candidate["score"]), reverse=True
+        modified_results, key=lambda candidate: int(float(candidate["score"].strip('%'))), reverse=True
     )
 
     # Implement pagination on the modified_results list.
