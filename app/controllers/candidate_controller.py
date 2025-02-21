@@ -11,14 +11,14 @@ from flask_smorest import Blueprint
 blp = Blueprint("Candidate", __name__, description="Candidate API")
 
 
-@blp.route("/upload-cv")
+@blp.route("/api/upload-cv")
 class UploadCV(MethodView):
     def post(self):
         result = candidate_service.upload_file_cv()
         return result
 
 
-@blp.route("/list-candidate")
+@blp.route("/api/list-candidate")
 class ListCandidate(MethodView):
     @blp.arguments(CandidateFilterSchema)
     @blp.response(200, CandidatePageSchema)
@@ -27,7 +27,7 @@ class ListCandidate(MethodView):
         return result
 
 
-@blp.route("/candidate/<string:candidate_id>")
+@blp.route("/api/candidate/<string:candidate_id>")
 class Candidate(MethodView):
     @blp.response(200, CandidateSchema)
     def get(self, candidate_id):

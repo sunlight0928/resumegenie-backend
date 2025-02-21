@@ -11,7 +11,7 @@ from flask_smorest import Blueprint
 blp = Blueprint("Job", __name__, description="Job API")
 
 
-@blp.route("/job")
+@blp.route("/api/job")
 class JobList(MethodView):
     @blp.response(200, PlainJobSchema(many=True))
     def get(self):
@@ -25,7 +25,7 @@ class JobList(MethodView):
         return result
 
 
-@blp.route("/job-page")
+@blp.route("/api/job-page")
 class JobPageList(MethodView):
     @blp.arguments(JobFilterPageSchema)
     @blp.response(200, JobPageSchema)
@@ -34,7 +34,7 @@ class JobPageList(MethodView):
         return result
 
 
-@blp.route("/job/<string:job_id>")
+@blp.route("/api/job/<string:job_id>")
 class JobQnA(MethodView):
     @blp.response(200, PlainJobSchema)
     def get(self, job_id):

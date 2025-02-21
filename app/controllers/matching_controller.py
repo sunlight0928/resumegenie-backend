@@ -12,7 +12,7 @@ from flask_smorest import Blueprint
 blp = Blueprint("Matching", __name__, description="Matching API")
 
 
-@blp.route("/process-matching")
+@blp.route("/api/process-matching")
 class Matching(MethodView):
     @blp.arguments(ProcessMatchingSchema)
     def post(self, matching_data):
@@ -20,7 +20,7 @@ class Matching(MethodView):
         return result
 
 
-@blp.route("/data-matching")
+@blp.route("/api/data-matching")
 class MatchingFilter(MethodView):
     @blp.response(200, MatchingSchema(many=True))
     def get(self):
@@ -34,7 +34,7 @@ class MatchingFilter(MethodView):
         return result
 
 
-@blp.route("/candidate/<string:candidate_id>/job/<string:job_id>")
+@blp.route("/api/candidate/<string:candidate_id>/job/<string:job_id>")
 class GetMatchingData(MethodView):
     @blp.response(200, MatchingDetailSchema)
     def get(self, candidate_id, job_id):
