@@ -101,14 +101,6 @@ def filter_matching_data(matching_data):
     return results
 
 
-def safe_score_conversion(score):
-    if isinstance(score, str):
-        return int(float(score.strip('%')))
-    elif isinstance(score, (int, float)):
-        return int(score)
-    else:
-        return 0  # or some other default value for unexpected types
-
 def filter_page(page_size, page, job_id):
     page_size = 10 if page_size is None else page_size
     page = 1 if page is None else page - 1
@@ -163,7 +155,7 @@ def filter_page(page_size, page, job_id):
         )
 
     modified_results = sorted(
-        modified_results, key=lambda candidate: safe_score_conversion(candidate["score"]), reverse=True
+        modified_results, key=lambda candidate: int(candidate["score"]), reverse=True
     )
 
     # Implement pagination on the modified_results list.
